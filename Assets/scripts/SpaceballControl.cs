@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpaceballControl : MonoBehaviour
 {
-    
+    // I am adding this to show something lol
+    // I am adding this to show something lol
     public enum whoyou {slave,master};
     public whoyou WhoYouState;
     public List<int> ListSpot = new List<int>();
