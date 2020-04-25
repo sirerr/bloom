@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SpaceballControl : MonoBehaviour
 {
-    // I am adding this to show something lol
-    // I am adding this to show something lol
+    
     public enum whoyou {slave,master};
     public whoyou WhoYouState;
+    public int ListCount = -1;
     public List<int> ListSpot = new List<int>();
     public List<GameObject> Touchers = new List<GameObject>();
+    public List<LineRenderer> LineRenders = new List<LineRenderer>(); 
 
     //Movement
     Rigidbody rbody;
@@ -38,19 +39,52 @@ public class SpaceballControl : MonoBehaviour
         if (Move)
         {
             rbody.AddForce(RandomDir() * speed);
-
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        int choose;
+        choose = Random.Range(0, 2);
+        if (choose == 0)
+            WhoYouState = whoyou.slave;
+        else
+            WhoYouState = whoyou.master;
+        MakeItHappen(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
     {
         
     }
+
+    public void MakeItHappen(GameObject obj)
+    {
+        LineRenderer Line = new LineRenderer();
+        
+        switch (WhoYouState)
+        {
+            case whoyou.master:
+                Line = transform.gameObject.AddComponent<LineRenderer>();
+                Line.SetPosition(0, transform.position);
+                Line.SetPosition(1, obj.transform.position);
+                
+                break;
+
+            case whoyou.slave:
+                
+                break;
+
+        }
+        LineRenders.Add(Line);
+
+    }
+
+    public void MakeNotHappen()
+    {
+
+    }
+
 
 
     Vector3 RandomDir ()
