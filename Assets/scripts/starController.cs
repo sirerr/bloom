@@ -7,6 +7,8 @@ public class starController : MonoBehaviour
     public int chosenSpot = 0;
     public Transform starCenter;
     public bool chosen = false;
+    public PokeController poke;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,12 @@ public class starController : MonoBehaviour
             if(endSpot>.01f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, starCenter.GetChild(chosenSpot).position, (Time.deltaTime *2));
+            }else
+            {
+                transform.parent = starCenter;
+                transform.localScale = Vector3.one;
+              
+                poke.StarWatcher();
             }
         }
         
